@@ -10,7 +10,24 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...compat.extends(
+    "next/core-web-vitals",
+    "next/typescript",
+    "standard",
+    "prettier",
+    "plugin:tailwindcss/recommended"
+  ),
+  {
+    rules: {
+      "@typescript-eslint/no-unused-vars": [
+        "warn", // Changes the error to a warning
+        {
+          argsIgnorePattern: "^_", // Ignore unused function arguments starting with "_"
+          varsIgnorePattern: "^_", // Ignore unused variables starting with "_"
+        },
+      ],
+    },
+  },
 ];
 
 export default eslintConfig;
